@@ -1,0 +1,2986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Lydia & Steve | Wedding Raffle</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+:root{
+    --bg:#070a12;
+    --card:#101525;
+    --card2:#151c2f;
+    --gold:#f6c453;
+    --gold2:#ffe39a;
+    --text:#f8fafc;
+    --muted:#8f99aa;
+    --green:#32d583;
+    --red:#ff657b;
+    --line:rgba(255,255,255,.08);
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:
+        radial-gradient(
+            circle at top,
+            #18203a 0,
+            #070a12 48%
+        );
+    color:var(--text);
+    min-height:100vh;
+}
+
+button,
+input{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+header{
+    padding:20px 6%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid var(--line);
+    background:rgba(7,10,18,.92);
+    backdrop-filter:blur(15px);
+    position:sticky;
+    top:0;
+    z-index:50;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo-icon{
+    width:42px;
+    height:42px;
+    display:grid;
+    place-items:center;
+    background:var(--gold);
+    color:#111;
+    border-radius:50%;
+    font-size:20px;
+}
+
+.logo h1{
+    font-size:17px;
+    letter-spacing:1px;
+}
+
+.logo small{
+    display:block;
+    color:var(--muted);
+    font-size:11px;
+    margin-top:3px;
+}
+
+.container{
+    width:min(1000px,92%);
+    margin:auto;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    min-height:470px;
+    display:grid;
+    place-items:center;
+    text-align:center;
+    padding:70px 20px 45px;
+}
+
+.hero-inner{
+    width:min(800px,100%);
+}
+
+.tag{
+    display:inline-block;
+    padding:8px 15px;
+    border:1px solid rgba(246,196,83,.35);
+    border-radius:50px;
+    color:var(--gold2);
+    text-transform:uppercase;
+    letter-spacing:2px;
+    font-size:11px;
+    margin-bottom:22px;
+}
+
+.hero h2{
+    font-size:clamp(50px,9vw,100px);
+    line-height:.88;
+    letter-spacing:-4px;
+    margin-bottom:22px;
+}
+
+.hero h2 span{
+    color:var(--gold);
+}
+
+.hero p{
+    color:#b5bdcd;
+    font-size:17px;
+    line-height:1.6;
+}
+
+.motivation{
+    margin:25px auto 0;
+    color:var(--gold2);
+    font-size:16px;
+    font-weight:700;
+    min-height:25px;
+    transition:.4s;
+}
+
+/* =========================
+   JOIN CARD
+========================= */
+
+.join{
+    width:min(520px,100%);
+    margin:-20px auto 70px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:22px;
+    padding:30px;
+    box-shadow:0 25px 80px rgba(0,0,0,.25);
+}
+
+.join h3{
+    text-align:center;
+    font-size:26px;
+    margin-bottom:7px;
+}
+
+.join-sub{
+    text-align:center;
+    color:var(--muted);
+    font-size:13px;
+    margin-bottom:25px;
+}
+
+.form{
+    display:grid;
+    gap:12px;
+}
+
+.input{
+    width:100%;
+    background:#090d18;
+    border:1px solid var(--line);
+    color:#fff;
+    padding:16px;
+    border-radius:11px;
+    outline:none;
+}
+
+.input:focus{
+    border-color:var(--gold);
+}
+
+.join-btn{
+    border:0;
+    background:var(--gold);
+    color:#111;
+    padding:16px;
+    border-radius:11px;
+    font-weight:900;
+    font-size:16px;
+    margin-top:3px;
+}
+
+.join-btn:hover{
+    filter:brightness(1.06);
+    transform:translateY(-1px);
+}
+
+/* =========================
+   TICKET RESULT
+========================= */
+
+.ticket-result{
+    display:none;
+    margin-top:20px;
+    padding:22px;
+    border-radius:15px;
+    background:var(--card2);
+    border:1px solid rgba(246,196,83,.25);
+    text-align:center;
+}
+
+.ticket-result.show{
+    display:block;
+}
+
+.result-label{
+    color:var(--muted);
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:2px;
+}
+
+.result-name{
+    font-size:22px;
+    font-weight:800;
+    margin:8px 0;
+}
+
+.ticket-number{
+    color:var(--gold);
+    font-size:42px;
+    font-weight:900;
+    margin:12px 0;
+}
+
+.result-message{
+    color:#aeb8ca;
+    line-height:1.6;
+    font-size:14px;
+}
+
+/* =========================
+   COUNTDOWN
+========================= */
+
+.section{
+    margin:50px 0;
+}
+
+.draw-card{
+    background:var(--card);
+    border:1px solid rgba(246,196,83,.18);
+    border-radius:22px;
+    padding:40px 20px;
+    text-align:center;
+}
+
+.live{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    color:var(--green);
+    font-size:11px;
+    letter-spacing:2px;
+    font-weight:800;
+    margin-bottom:18px;
+}
+
+.live-dot{
+    width:8px;
+    height:8px;
+    background:var(--green);
+    border-radius:50%;
+    animation:pulse 1.3s infinite;
+}
+
+@keyframes pulse{
+    0%,100%{
+        opacity:1;
+    }
+    50%{
+        opacity:.3;
+    }
+}
+
+.next-label{
+    color:var(--muted);
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+}
+
+.next-title{
+    color:var(--gold);
+    font-size:38px;
+    font-weight:900;
+    margin:8px 0 22px;
+}
+
+.countdown{
+    display:flex;
+    justify-content:center;
+    gap:9px;
+    flex-wrap:wrap;
+}
+
+.time{
+    min-width:85px;
+    padding:17px 10px;
+    background:var(--card2);
+    border:1px solid var(--line);
+    border-radius:12px;
+}
+
+.time strong{
+    display:block;
+    font-size:33px;
+}
+
+.time small{
+    color:var(--muted);
+    font-size:9px;
+    text-transform:uppercase;
+    letter-spacing:2px;
+}
+
+.status{
+    margin-top:20px;
+    color:var(--muted);
+}
+
+.open{
+    color:var(--gold);
+    font-weight:800;
+}
+
+/* =========================
+   WINNERS
+========================= */
+
+.section-title{
+    margin-bottom:18px;
+}
+
+.section-title h3{
+    font-size:28px;
+}
+
+.section-title p{
+    color:var(--muted);
+    margin-top:5px;
+}
+
+.winners{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+}
+
+.winner{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:17px;
+    padding:26px 15px;
+    text-align:center;
+}
+
+.winner.won{
+    border-color:rgba(246,196,83,.4);
+}
+
+.winner small{
+    color:var(--gold);
+    letter-spacing:2px;
+    font-size:10px;
+}
+
+.winner strong{
+    display:block;
+    font-size:30px;
+    margin:15px 0 6px;
+}
+
+.winner span{
+    color:var(--muted);
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    margin-top:70px;
+    padding:30px 20px;
+    text-align:center;
+    color:#697386;
+    border-top:1px solid var(--line);
+}
+
+/* =========================
+   LOGIN
+========================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.82);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:200;
+    padding:20px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.login-box{
+    width:min(360px,100%);
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:28px;
+}
+
+.login-box h3{
+    margin-bottom:18px;
+}
+
+.login-error{
+    display:none;
+    color:var(--red);
+    font-size:13px;
+    margin-bottom:10px;
+}
+
+.login-btn{
+    width:100%;
+    margin-top:10px;
+    border:0;
+    padding:14px;
+    border-radius:10px;
+    font-weight:800;
+}
+
+.gold-btn{
+    background:var(--gold);
+    color:#111;
+}
+
+.dark-btn{
+    background:var(--card2);
+    color:#fff;
+    border:1px solid var(--line);
+}
+
+/* =========================
+   ADMIN
+========================= */
+
+#adminPage{
+    display:none;
+    min-height:100vh;
+    background:#080b13;
+}
+
+.admin-header{
+    height:70px;
+    padding:0 4%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:#0b0e17;
+    border-bottom:1px solid var(--line);
+    position:sticky;
+    top:0;
+    z-index:50;
+}
+
+.admin-brand{
+    font-weight:900;
+    letter-spacing:1px;
+}
+
+.admin-brand span{
+    color:var(--gold);
+}
+
+.admin{
+    padding:30px 0 70px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+}
+
+.stat{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:15px;
+    padding:20px;
+}
+
+.stat small{
+    color:var(--muted);
+}
+
+.stat strong{
+    display:block;
+    color:var(--gold);
+    margin-top:7px;
+    font-size:27px;
+}
+
+.admin-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:24px;
+    margin-top:18px;
+}
+
+.admin-card h3{
+    margin-bottom:17px;
+}
+
+.admin-form{
+    display:grid;
+    grid-template-columns:2fr 1.2fr 1.5fr auto;
+    gap:10px;
+}
+
+.admin-input{
+    width:100%;
+    padding:13px;
+    background:#090d18;
+    color:#fff;
+    border:1px solid var(--line);
+    border-radius:10px;
+    outline:none;
+}
+
+.admin-input:focus{
+    border-color:var(--gold);
+}
+
+.admin-btn{
+    border:0;
+    padding:13px 18px;
+    border-radius:10px;
+    font-weight:800;
+}
+
+.table-wrap{
+    overflow:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,
+td{
+    padding:12px 8px;
+    border-bottom:1px solid var(--line);
+    text-align:left;
+    white-space:nowrap;
+}
+
+th{
+    color:var(--muted);
+    font-size:11px;
+    text-transform:uppercase;
+}
+
+.ticket-code{
+    color:var(--gold);
+    font-weight:900;
+}
+
+.remove{
+    border:0;
+    background:#34131b;
+    color:#ff7b8b;
+    padding:7px 11px;
+    border-radius:8px;
+}
+
+.draw-box{
+    text-align:center;
+    padding:35px 20px;
+    background:#090d17;
+    border:1px solid var(--line);
+    border-radius:16px;
+}
+
+.current-winner{
+    color:var(--gold);
+    font-weight:900;
+    letter-spacing:2px;
+}
+
+.draw-number{
+    color:var(--gold);
+    font-size:65px;
+    font-weight:900;
+    margin:15px 0 3px;
+}
+
+.draw-name{
+    font-size:24px;
+    font-weight:800;
+}
+
+.draw-message{
+    color:var(--muted);
+    margin-top:8px;
+    min-height:20px;
+}
+
+.admin-actions{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top:22px;
+    flex-wrap:wrap;
+}
+
+.admin-winners{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+}
+
+/* =========================
+   WINNER POPUP
+========================= */
+
+.popup{
+    position:fixed;
+    inset:0;
+    z-index:500;
+    background:#05070d;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:20px;
+}
+
+.popup.show{
+    display:flex;
+}
+
+.popup small{
+    color:var(--gold);
+    letter-spacing:4px;
+}
+
+.popup h1{
+    font-size:clamp(45px,8vw,85px);
+    margin:18px 0;
+}
+
+.popup-ticket{
+    color:var(--gold);
+    font-size:clamp(65px,12vw,140px);
+    font-weight:900;
+    line-height:1;
+}
+
+.popup-name{
+    font-size:clamp(25px,5vw,45px);
+    margin:18px 0 25px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:800px){
+
+    .hero h2{
+        letter-spacing:-3px;
+    }
+
+    .stats,
+    .winners,
+    .admin-winners{
+        grid-template-columns:1fr;
+    }
+
+    .admin-form{
+        grid-template-columns:1fr;
+    }
+
+    .ticket-form{
+        display:grid;
+    }
+
+    .join{
+        padding:22px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<!-- =====================================================
+     PARTICIPANT PAGE
+===================================================== -->
+
+<div id="publicPage">
+
+<header>
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            💍
+        </div>
+
+        <div>
+            <h1>LYDIA N STEVE</h1>
+            <small>Wedding Raffle</small>
+        </div>
+
+    </div>
+
+    <button
+        onclick="openLogin()"
+        style="
+            background:none;
+            border:0;
+            color:#687386;
+            font-size:12px;
+        "
+    >
+        Admin
+    </button>
+
+</header>
+
+
+<main>
+
+<section class="hero">
+
+    <div class="hero-inner">
+
+        <span class="tag">
+            Wedding Raffle
+        </span>
+
+        <h2>
+            LYDIA <span>&</span><br>
+            STEVE
+        </h2>
+
+        <p>
+            Join the challenge and stand a chance to win.
+        </p>
+
+        <div
+            class="motivation"
+            id="motivation"
+        >
+            Every ticket brings us closer to the celebration. ❤️
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="container">
+
+    <!-- JOIN -->
+
+    <div class="join">
+
+        <h3>
+            Join Challenge
+        </h3>
+
+        <div class="join-sub">
+            Enter your details
+        </div>
+
+        <div class="form">
+
+            <input
+                id="name"
+                class="input"
+                type="text"
+                placeholder="Your name"
+            >
+
+            <input
+                id="phone"
+                class="input"
+                type="tel"
+                placeholder="Phone number"
+            >
+
+            <input
+                id="mpesa"
+                class="input"
+                type="text"
+                placeholder="M-Pesa code"
+                autocomplete="off"
+            >
+
+            <button
+                class="join-btn"
+                onclick="joinChallenge()"
+            >
+                JOIN CHALLENGE
+            </button>
+
+        </div>
+
+        <div
+            id="ticketResult"
+            class="ticket-result"
+        ></div>
+
+    </div>
+
+
+    <!-- COUNTDOWN -->
+
+    <section class="section">
+
+        <div class="draw-card">
+
+            <div class="live">
+                <span class="live-dot"></span>
+                LIVE
+            </div>
+
+            <div class="next-label">
+                NEXT WINNER
+            </div>
+
+            <div
+                class="next-title"
+                id="nextTitle"
+            >
+                WINNER #1
+            </div>
+
+            <div class="countdown">
+
+                <div class="time">
+                    <strong id="days">00</strong>
+                    <small>Days</small>
+                </div>
+
+                <div class="time">
+                    <strong id="hours">00</strong>
+                    <small>Hours</small>
+                </div>
+
+                <div class="time">
+                    <strong id="minutes">00</strong>
+                    <small>Minutes</small>
+                </div>
+
+                <div class="time">
+                    <strong id="seconds">00</strong>
+                    <small>Seconds</small>
+                </div>
+
+            </div>
+
+            <div
+                id="drawStatus"
+                class="status"
+            >
+                Waiting for draw time.
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- WINNERS -->
+
+    <section class="section">
+
+        <div class="section-title">
+
+            <h3>
+                Winners
+            </h3>
+
+            <p>
+                Congratulations 🎉
+            </p>
+
+        </div>
+
+        <div
+            class="winners"
+            id="winners"
+        ></div>
+
+    </section>
+
+</section>
+
+</main>
+
+
+<footer>
+    Lydia & Steve Wedding Raffle
+</footer>
+
+</div>
+
+
+<!-- =====================================================
+     LOGIN
+===================================================== -->
+
+<div
+    id="loginModal"
+    class="modal"
+>
+
+    <div class="login-box">
+
+        <h3>
+            Admin
+        </h3>
+
+        <div
+            id="loginError"
+            class="login-error"
+        >
+            Wrong password.
+        </div>
+
+        <input
+            id="password"
+            class="input"
+            type="password"
+            placeholder="Password"
+        >
+
+        <button
+            class="login-btn gold-btn"
+            onclick="login()"
+        >
+            Login
+        </button>
+
+        <button
+            class="login-btn dark-btn"
+            onclick="closeLogin()"
+        >
+            Cancel
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     ADMIN
+===================================================== -->
+
+<div id="adminPage">
+
+<header class="admin-header">
+
+    <div class="admin-brand">
+        LYDIA <span>&</span> STEVE — ADMIN
+    </div>
+
+    <button
+        class="admin-btn"
+        style="
+            background:#151c2f;
+            color:white;
+            border:1px solid var(--line);
+        "
+        onclick="logout()"
+    >
+        Exit
+    </button>
+
+</header>
+
+
+<main class="container admin">
+
+
+    <!-- STATS -->
+
+    <div class="stats">
+
+        <div class="stat">
+
+            <small>
+                Participants
+            </small>
+
+            <strong
+                id="participantCount"
+            >
+                0
+            </strong>
+
+        </div>
+
+        <div class="stat">
+
+            <small>
+                M-Pesa Entries
+            </small>
+
+            <strong
+                id="mpesaCount"
+            >
+                0
+            </strong>
+
+        </div>
+
+        <div class="stat">
+
+            <small>
+                Winners
+            </small>
+
+            <strong
+                id="winnerCount"
+            >
+                0 / 3
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <!-- DRAW TIME -->
+
+    <div class="admin-card">
+
+        <h3>
+            First Draw Time
+        </h3>
+
+        <div
+            style="
+                display:grid;
+                grid-template-columns:1fr auto;
+                gap:10px;
+            "
+        >
+
+            <input
+                id="firstDraw"
+                class="admin-input"
+                type="datetime-local"
+            >
+
+            <button
+                class="admin-btn"
+                style="
+                    background:var(--gold);
+                    color:#111;
+                "
+                onclick="saveSchedule()"
+            >
+                Save
+            </button>
+
+        </div>
+
+        <p
+            style="
+                color:var(--muted);
+                font-size:12px;
+                margin-top:10px;
+            "
+        >
+            Winner #1 = selected time · Winner #2 = +1 hour · Winner #3 = +2 hours
+        </p>
+
+    </div>
+
+
+    <!-- PARTICIPANTS -->
+
+    <div class="admin-card">
+
+        <h3>
+            Participants
+        </h3>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Ticket</th>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>M-Pesa</th>
+                        <th></th>
+                    </tr>
+
+                </thead>
+
+                <tbody
+                    id="participantTable"
+                ></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!-- DRAW -->
+
+    <div class="admin-card">
+
+        <h3>
+            Draw
+        </h3>
+
+        <div class="draw-box">
+
+            <div
+                id="currentWinner"
+                class="current-winner"
+            >
+                WINNER #1
+            </div>
+
+            <div
+                id="drawNumber"
+                class="draw-number"
+            >
+                ---
+            </div>
+
+            <div
+                id="drawName"
+                class="draw-name"
+            >
+                Ready
+            </div>
+
+            <div
+                id="drawMessage"
+                class="draw-message"
+            >
+                Set the draw time.
+            </div>
+
+            <div class="admin-actions">
+
+                <button
+                    id="drawButton"
+                    class="admin-btn"
+                    style="
+                        background:var(--gold);
+                        color:#111;
+                    "
+                    onclick="startDraw()"
+                    disabled
+                >
+                    DRAW
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- WINNERS -->
+
+    <div class="admin-card">
+
+        <h3>
+            Winners
+        </h3>
+
+        <div
+            id="adminWinners"
+            class="admin-winners"
+        ></div>
+
+    </div>
+
+
+    <!-- BACKUP -->
+
+    <div class="admin-card">
+
+        <h3>
+            Backup
+        </h3>
+
+        <button
+            class="admin-btn"
+            style="
+                background:#151c2f;
+                color:#fff;
+                border:1px solid var(--line);
+            "
+            onclick="downloadBackup()"
+        >
+            Download Backup
+        </button>
+
+        <button
+            class="admin-btn"
+            style="
+                background:#34131b;
+                color:#ff8291;
+                margin-left:7px;
+            "
+            onclick="resetAll()"
+        >
+            Reset
+        </button>
+
+    </div>
+
+</main>
+
+</div>
+
+
+<!-- =====================================================
+     WINNER POPUP
+===================================================== -->
+
+<div
+    id="winnerPopup"
+    class="popup"
+>
+
+    <div>
+
+        <small>
+            LYDIA & STEVE
+        </small>
+
+        <h1>
+            WINNER
+            <span id="popupPosition">
+                #1
+            </span>
+        </h1>
+
+        <div
+            id="popupTicket"
+            class="popup-ticket"
+        >
+            LS-00000
+        </div>
+
+        <div
+            id="popupName"
+            class="popup-name"
+        >
+            Name
+        </div>
+
+        <button
+            class="admin-btn"
+            style="
+                background:var(--gold);
+                color:#111;
+            "
+            onclick="closeWinnerPopup()"
+        >
+            Close
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   DATA
+===================================================== */
+
+const ADMIN_PASSWORD = "1234";
+
+let participants =
+    JSON.parse(
+        localStorage.getItem(
+            "lsParticipants"
+        )
+    ) || [];
+
+let winners =
+    JSON.parse(
+        localStorage.getItem(
+            "lsWinners"
+        )
+    ) || [];
+
+let settings =
+    JSON.parse(
+        localStorage.getItem(
+            "lsSettings"
+        )
+    ) || {
+        firstDraw:null
+    };
+
+let drawing = false;
+
+
+/* =====================================================
+   MOTIVATION
+===================================================== */
+
+const motivations = [
+
+    "Every ticket brings us closer to the celebration. ❤️",
+
+    "Join the challenge. Be part of the story.",
+
+    "One celebration. Many hearts. 🎉",
+
+    "Your support means something.",
+
+    "Let's celebrate Lydia & Steve together. ❤️",
+
+    "One ticket could be your moment. 🎟️"
+
+];
+
+let motivationIndex = 0;
+
+
+/* =====================================================
+   INIT
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        renderPublic();
+
+        setInterval(
+            updateClock,
+            1000
+        );
+
+        setInterval(
+            rotateMotivation,
+            5000
+        );
+
+        updateClock();
+
+    }
+);
+
+
+/* =====================================================
+   ROTATE MESSAGE
+===================================================== */
+
+function rotateMotivation(){
+
+    const el =
+        document.getElementById(
+            "motivation"
+        );
+
+    el.style.opacity="0";
+
+    setTimeout(
+        () => {
+
+            motivationIndex =
+                (
+                    motivationIndex + 1
+                )
+                %
+                motivations.length;
+
+            el.textContent =
+                motivations[
+                    motivationIndex
+                ];
+
+            el.style.opacity="1";
+
+        },
+        300
+    );
+
+}
+
+
+/* =====================================================
+   JOIN CHALLENGE
+===================================================== */
+
+function joinChallenge(){
+
+    const name =
+        document
+            .getElementById("name")
+            .value
+            .trim();
+
+    const phone =
+        document
+            .getElementById("phone")
+            .value
+            .trim();
+
+    const mpesa =
+        document
+            .getElementById("mpesa")
+            .value
+            .trim()
+            .toUpperCase();
+
+    if(
+        !name ||
+        !phone ||
+        !mpesa
+    ){
+
+        showTicketResult(
+            "Please enter your name, phone and M-Pesa code.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    /* Prevent duplicate M-Pesa code */
+
+    const existing =
+        participants.find(
+            p =>
+                p.mpesa.toUpperCase()
+                === mpesa
+        );
+
+    if(existing){
+
+        showTicketResult(
+            `
+            This M-Pesa code is already registered.
+            <br><br>
+            Ticket:
+            <strong>${existing.ticket}</strong>
+            `,
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const ticket =
+        generateTicket();
+
+
+    participants.push({
+
+        id:Date.now(),
+
+        ticket,
+
+        name,
+
+        phone,
+
+        mpesa,
+
+        joinedAt:
+            new Date().toISOString()
+
+    });
+
+
+    save();
+
+
+    document
+        .getElementById("name")
+        .value="";
+
+    document
+        .getElementById("phone")
+        .value="";
+
+    document
+        .getElementById("mpesa")
+        .value="";
+
+
+    showTicketResult(
+        `
+        <div class="result-label">
+            YOUR TICKET
+        </div>
+
+        <div class="result-name">
+            ${safe(name)}
+        </div>
+
+        <div class="ticket-number">
+            ${ticket}
+        </div>
+
+        <div class="result-message">
+            You're in. Good luck! 🎉
+        </div>
+        `,
+        "success"
+    );
+
+    renderPublic();
+
+}
+
+
+/* =====================================================
+   RESULT
+===================================================== */
+
+function showTicketResult(
+    message,
+    type=""
+){
+
+    const box =
+        document.getElementById(
+            "ticketResult"
+        );
+
+    box.className =
+        "ticket-result show";
+
+    if(type === "error"){
+
+        box.innerHTML = `
+            <div class="result-message"
+                 style="color:var(--red)">
+                ${message}
+            </div>
+        `;
+
+    }else{
+
+        box.innerHTML =
+            message;
+
+    }
+
+}
+
+
+/* =====================================================
+   TICKET
+===================================================== */
+
+function generateTicket(){
+
+    let ticket;
+
+    do{
+
+        ticket =
+            "LS-" +
+            Math.floor(
+                10000 +
+                Math.random()
+                * 90000
+            );
+
+    }while(
+        participants.some(
+            p =>
+                p.ticket === ticket
+        )
+    );
+
+    return ticket;
+
+}
+
+
+/* =====================================================
+   SAVE
+===================================================== */
+
+function save(){
+
+    localStorage.setItem(
+        "lsParticipants",
+        JSON.stringify(
+            participants
+        )
+    );
+
+    localStorage.setItem(
+        "lsWinners",
+        JSON.stringify(
+            winners
+        )
+    );
+
+    localStorage.setItem(
+        "lsSettings",
+        JSON.stringify(
+            settings
+        )
+    );
+
+}
+
+
+/* =====================================================
+   PUBLIC
+===================================================== */
+
+function renderPublic(){
+
+    renderWinners();
+
+    updateClock();
+
+}
+
+
+/* =====================================================
+   CLOCK
+===================================================== */
+
+function getDrawTime(position){
+
+    if(!settings.firstDraw){
+
+        return null;
+
+    }
+
+    return new Date(
+        new Date(
+            settings.firstDraw
+        ).getTime()
+        +
+        (
+            (position - 1)
+            *
+            60
+            *
+            60
+            *
+            1000
+        )
+    );
+
+}
+
+
+function updateClock(){
+
+    const next =
+        winners.length + 1;
+
+    const title =
+        document.getElementById(
+            "nextTitle"
+        );
+
+    const status =
+        document.getElementById(
+            "drawStatus"
+        );
+
+
+    if(next > 3){
+
+        title.textContent =
+            "ALL WINNERS";
+
+        status.textContent =
+            "All 3 winners selected. ❤️";
+
+        setClockZero();
+
+        return;
+
+    }
+
+
+    title.textContent =
+        `WINNER #${next}`;
+
+
+    const drawTime =
+        getDrawTime(next);
+
+
+    if(!drawTime){
+
+        status.textContent =
+            "Draw time coming soon.";
+
+        return;
+
+    }
+
+
+    const difference =
+        drawTime - new Date();
+
+
+    if(difference <= 0){
+
+        setClockZero();
+
+        status.textContent =
+            `WINNER #${next} — DRAW NOW`;
+
+        status.className =
+            "status open";
+
+        return;
+
+    }
+
+
+    const seconds =
+        Math.floor(
+            difference / 1000
+        );
+
+    const days =
+        Math.floor(
+            seconds / 86400
+        );
+
+    const hours =
+        Math.floor(
+            (seconds % 86400) / 3600
+        );
+
+    const minutes =
+        Math.floor(
+            (seconds % 3600) / 60
+        );
+
+    const secs =
+        seconds % 60;
+
+
+    document.getElementById(
+        "days"
+    ).textContent =
+        pad(days);
+
+    document.getElementById(
+        "hours"
+    ).textContent =
+        pad(hours);
+
+    document.getElementById(
+        "minutes"
+    ).textContent =
+        pad(minutes);
+
+    document.getElementById(
+        "seconds"
+    ).textContent =
+        pad(secs);
+
+    status.className =
+        "status";
+
+}
+
+
+function setClockZero(){
+
+    document.getElementById(
+        "days"
+    ).textContent="00";
+
+    document.getElementById(
+        "hours"
+    ).textContent="00";
+
+    document.getElementById(
+        "minutes"
+    ).textContent="00";
+
+    document.getElementById(
+        "seconds"
+    ).textContent="00";
+
+}
+
+
+function pad(value){
+
+    return String(value)
+        .padStart(
+            2,
+            "0"
+        );
+
+}
+
+
+/* =====================================================
+   PUBLIC WINNERS
+===================================================== */
+
+function renderWinners(){
+
+    const box =
+        document.getElementById(
+            "winners"
+        );
+
+    box.innerHTML="";
+
+    for(
+        let i=1;
+        i<=3;
+        i++
+    ){
+
+        const winner =
+            winners.find(
+                w =>
+                    w.position === i
+            );
+
+        const card =
+            document.createElement(
+                "div"
+            );
+
+        card.className =
+            "winner";
+
+        if(winner){
+
+            card.classList.add(
+                "won"
+            );
+
+        }
+
+        card.innerHTML = `
+
+            <small>
+                WINNER #${i}
+            </small>
+
+            <strong>
+                ${
+                    winner
+                    ? winner.ticket
+                    : "---"
+                }
+            </strong>
+
+            <span>
+                ${
+                    winner
+                    ? safe(winner.name)
+                    : "Waiting"
+                }
+            </span>
+
+        `;
+
+        box.appendChild(card);
+
+    }
+
+}
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+function openLogin(){
+
+    document
+        .getElementById(
+            "loginModal"
+        )
+        .classList.add(
+            "show"
+        );
+
+    document
+        .getElementById(
+            "password"
+        )
+        .focus();
+
+}
+
+
+function closeLogin(){
+
+    document
+        .getElementById(
+            "loginModal"
+        )
+        .classList.remove(
+            "show"
+        );
+
+}
+
+
+function login(){
+
+    const password =
+        document
+            .getElementById(
+                "password"
+            )
+            .value;
+
+    if(
+        password ===
+        ADMIN_PASSWORD
+    ){
+
+        closeLogin();
+
+        document
+            .getElementById(
+                "publicPage"
+            )
+            .style.display="none";
+
+        document
+            .getElementById(
+                "adminPage"
+            )
+            .style.display="block";
+
+        renderAdmin();
+
+    }else{
+
+        document
+            .getElementById(
+                "loginError"
+            )
+            .style.display="block";
+
+    }
+
+}
+
+
+function logout(){
+
+    document
+        .getElementById(
+            "adminPage"
+        )
+        .style.display="none";
+
+    document
+        .getElementById(
+            "publicPage"
+        )
+        .style.display="block";
+
+}
+
+
+/* =====================================================
+   ADMIN
+===================================================== */
+
+function renderAdmin(){
+
+    document
+        .getElementById(
+            "participantCount"
+        )
+        .textContent =
+        participants.length;
+
+
+    document
+        .getElementById(
+            "mpesaCount"
+        )
+        .textContent =
+        participants.length;
+
+
+    document
+        .getElementById(
+            "winnerCount"
+        )
+        .textContent =
+        `${winners.length} / 3`;
+
+
+    document
+        .getElementById(
+            "firstDraw"
+        )
+        .value =
+        settings.firstDraw || "";
+
+
+    renderParticipantTable();
+
+    renderAdminWinners();
+
+    updateAdminDraw();
+
+}
+
+
+function renderParticipantTable(){
+
+    const table =
+        document.getElementById(
+            "participantTable"
+        );
+
+    table.innerHTML="";
+
+
+    participants.forEach(
+        p => {
+
+            const row =
+                document.createElement(
+                    "tr"
+                );
+
+            row.innerHTML = `
+
+                <td class="ticket-code">
+                    ${p.ticket}
+                </td>
+
+                <td>
+                    ${safe(p.name)}
+                </td>
+
+                <td>
+                    ${safe(p.phone)}
+                </td>
+
+                <td>
+                    ${safe(p.mpesa)}
+                </td>
+
+                <td>
+                    <button
+                        class="remove"
+                        onclick="removeParticipant(${p.id})"
+                    >
+                        Remove
+                    </button>
+                </td>
+
+            `;
+
+            table.appendChild(row);
+
+        }
+    );
+
+}
+
+
+function removeParticipant(id){
+
+    if(
+        !confirm(
+            "Remove this participant?"
+        )
+    ){
+
+        return;
+
+    }
+
+
+    participants =
+        participants.filter(
+            p =>
+                p.id !== id
+        );
+
+
+    save();
+
+    renderAdmin();
+
+    renderPublic();
+
+}
+
+
+/* =====================================================
+   SCHEDULE
+===================================================== */
+
+function saveSchedule(){
+
+    const value =
+        document
+            .getElementById(
+                "firstDraw"
+            )
+            .value;
+
+    if(!value){
+
+        alert(
+            "Choose the first draw time."
+        );
+
+        return;
+
+    }
+
+
+    if(
+        winners.length > 0
+    ){
+
+        alert(
+            "The raffle has already started."
+        );
+
+        return;
+
+    }
+
+
+    settings.firstDraw =
+        value;
+
+
+    save();
+
+
+    renderAdmin();
+
+    renderPublic();
+
+
+    alert(
+        "Draw time saved."
+    );
+
+}
+
+
+/* =====================================================
+   ADMIN DRAW
+===================================================== */
+
+function updateAdminDraw(){
+
+    const position =
+        winners.length + 1;
+
+    const button =
+        document.getElementById(
+            "drawButton"
+        );
+
+    const current =
+        document.getElementById(
+            "currentWinner"
+        );
+
+    const message =
+        document.getElementById(
+            "drawMessage"
+        );
+
+
+    if(position > 3){
+
+        current.textContent =
+            "COMPLETE";
+
+        message.textContent =
+            "All winners selected.";
+
+        button.disabled=true;
+
+        return;
+
+    }
+
+
+    current.textContent =
+        `WINNER #${position}`;
+
+
+    const drawTime =
+        getDrawTime(
+            position
+        );
+
+
+    if(!drawTime){
+
+        message.textContent =
+            "Set the first draw time.";
+
+        button.disabled=true;
+
+        return;
+
+    }
+
+
+    if(
+        new Date() >= drawTime
+    ){
+
+        message.textContent =
+            "DRAW IS OPEN";
+
+        button.disabled =
+            drawing;
+
+    }else{
+
+        message.textContent =
+            "Waiting for draw time.";
+
+        button.disabled=true;
+
+    }
+
+}
+
+
+setInterval(
+    () => {
+
+        if(
+            document
+                .getElementById(
+                    "adminPage"
+                )
+                .style
+                .display === "block"
+        ){
+
+            updateAdminDraw();
+
+        }
+
+    },
+    1000
+);
+
+
+/* =====================================================
+   START DRAW
+===================================================== */
+
+function startDraw(){
+
+    if(drawing){
+
+        return;
+
+    }
+
+
+    const position =
+        winners.length + 1;
+
+
+    if(position > 3){
+
+        return;
+
+    }
+
+
+    const drawTime =
+        getDrawTime(
+            position
+        );
+
+
+    if(
+        !drawTime ||
+        new Date() < drawTime
+    ){
+
+        alert(
+            "The draw is not open yet."
+        );
+
+        return;
+
+    }
+
+
+    if(
+        participants.length < 3
+    ){
+
+        alert(
+            "At least 3 participants are required."
+        );
+
+        return;
+
+    }
+
+
+    const available =
+        participants.filter(
+            participant =>
+                !winners.some(
+                    winner =>
+                        winner.ticket ===
+                        participant.ticket
+                )
+        );
+
+
+    if(!available.length){
+
+        return;
+
+    }
+
+
+    drawing=true;
+
+
+    const number =
+        document.getElementById(
+            "drawNumber"
+        );
+
+    const name =
+        document.getElementById(
+            "drawName"
+        );
+
+
+    document
+        .getElementById(
+            "drawButton"
+        )
+        .disabled=true;
+
+
+    document
+        .getElementById(
+            "drawButton"
+        )
+        .textContent=
+        "DRAWING...";
+
+
+    let count=0;
+
+
+    const animation =
+        setInterval(
+            () => {
+
+                const random =
+                    available[
+                        Math.floor(
+                            Math.random()
+                            *
+                            available.length
+                        )
+                    ];
+
+
+                number.textContent =
+                    random.ticket;
+
+                name.textContent =
+                    random.name;
+
+
+                count++;
+
+
+                if(
+                    count >= 50
+                ){
+
+                    clearInterval(
+                        animation
+                    );
+
+
+                    const winner =
+                        available[
+                            Math.floor(
+                                Math.random()
+                                *
+                                available.length
+                            )
+                        ];
+
+
+                    finishDraw(
+                        winner,
+                        position
+                    );
+
+                }
+
+            },
+            80
+        );
+
+}
+
+
+/* =====================================================
+   FINISH DRAW
+===================================================== */
+
+function finishDraw(
+    winner,
+    position
+){
+
+    winners.push({
+
+        position,
+
+        ticket:winner.ticket,
+
+        name:winner.name,
+
+        phone:winner.phone,
+
+        mpesa:winner.mpesa,
+
+        date:
+            new Date()
+                .toISOString()
+
+    });
+
+
+    save();
+
+
+    drawing=false;
+
+
+    document
+        .getElementById(
+            "drawNumber"
+        )
+        .textContent =
+        winner.ticket;
+
+
+    document
+        .getElementById(
+            "drawName"
+        )
+        .textContent =
+        winner.name;
+
+
+    document
+        .getElementById(
+            "drawMessage"
+        )
+        .textContent =
+        `WINNER #${position}`;
+
+
+    document
+        .getElementById(
+            "drawButton"
+        )
+        .textContent =
+        "DRAW";
+
+
+    renderAdmin();
+
+    renderPublic();
+
+
+    showWinnerPopup(
+        winner,
+        position
+    );
+
+
+    celebrate();
+
+}
+
+
+/* =====================================================
+   ADMIN WINNERS
+===================================================== */
+
+function renderAdminWinners(){
+
+    const box =
+        document.getElementById(
+            "adminWinners"
+        );
+
+    box.innerHTML="";
+
+
+    for(
+        let i=1;
+        i<=3;
+        i++
+    ){
+
+        const winner =
+            winners.find(
+                w =>
+                    w.position === i
+            );
+
+
+        const card =
+            document.createElement(
+                "div"
+            );
+
+        card.className =
+            "winner";
+
+
+        if(winner){
+
+            card.classList.add(
+                "won"
+            );
+
+        }
+
+
+        card.innerHTML = `
+
+            <small>
+                WINNER #${i}
+            </small>
+
+            <strong>
+                ${
+                    winner
+                    ? winner.ticket
+                    : "---"
+                }
+            </strong>
+
+            <span>
+                ${
+                    winner
+                    ? safe(winner.name)
+                    : "Waiting"
+                }
+            </span>
+
+        `;
+
+
+        box.appendChild(
+            card
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   POPUP
+===================================================== */
+
+function showWinnerPopup(
+    winner,
+    position
+){
+
+    document
+        .getElementById(
+            "popupPosition"
+        )
+        .textContent =
+        `#${position}`;
+
+
+    document
+        .getElementById(
+            "popupTicket"
+        )
+        .textContent =
+        winner.ticket;
+
+
+    document
+        .getElementById(
+            "popupName"
+        )
+        .textContent =
+        winner.name;
+
+
+    document
+        .getElementById(
+            "winnerPopup"
+        )
+        .classList.add(
+            "show"
+        );
+
+}
+
+
+function closeWinnerPopup(){
+
+    document
+        .getElementById(
+            "winnerPopup"
+        )
+        .classList.remove(
+            "show"
+        );
+
+}
+
+
+/* =====================================================
+   CONFETTI
+===================================================== */
+
+function celebrate(){
+
+    const symbols=[
+        "✦",
+        "◆",
+        "●",
+        "♥"
+    ];
+
+
+    for(
+        let i=0;
+        i<90;
+        i++
+    ){
+
+        const piece =
+            document.createElement(
+                "div"
+            );
+
+
+        piece.textContent =
+            symbols[
+                Math.floor(
+                    Math.random()
+                    *
+                    symbols.length
+                )
+            ];
+
+
+        piece.style.position=
+            "fixed";
+
+        piece.style.left=
+            Math.random()
+            *
+            100
+            +
+            "vw";
+
+        piece.style.top=
+            "-20px";
+
+        piece.style.color=
+            Math.random()>.5
+            ? "#f6c453"
+            : "#ffffff";
+
+        piece.style.fontSize=
+            12
+            +
+            Math.random()*16
+            +
+            "px";
+
+        piece.style.zIndex=
+            "999";
+
+
+        document.body.appendChild(
+            piece
+        );
+
+
+        const duration =
+            1500
+            +
+            Math.random()*1800;
+
+
+        piece.animate(
+            [
+                {
+                    transform:
+                        "translateY(0) rotate(0deg)",
+                    opacity:1
+                },
+                {
+                    transform:
+                        "translateY(110vh) rotate(720deg)",
+                    opacity:0
+                }
+            ],
+            {
+                duration,
+                easing:
+                    "cubic-bezier(.2,.7,.3,1)"
+            }
+        );
+
+
+        setTimeout(
+            () => piece.remove(),
+            duration
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   BACKUP
+===================================================== */
+
+function downloadBackup(){
+
+    const backup={
+        participants,
+        winners,
+        settings,
+        exported:
+            new Date()
+                .toISOString()
+    };
+
+
+    const blob =
+        new Blob(
+            [
+                JSON.stringify(
+                    backup,
+                    null,
+                    2
+                )
+            ],
+            {
+                type:
+                    "application/json"
+            }
+        );
+
+
+    const url =
+        URL.createObjectURL(
+            blob
+        );
+
+
+    const a =
+        document.createElement(
+            "a"
+        );
+
+
+    a.href=url;
+
+    a.download=
+        "lydia-steve-raffle-backup.json";
+
+
+    document.body.appendChild(a);
+
+    a.click();
+
+    a.remove();
+
+    URL.revokeObjectURL(
+        url
+    );
+
+}
+
+
+/* =====================================================
+   RESET
+===================================================== */
+
+function resetAll(){
+
+    if(
+        !confirm(
+            "Delete all raffle data?"
+        )
+    ){
+
+        return;
+
+    }
+
+
+    participants=[];
+
+    winners=[];
+
+    settings={
+        firstDraw:null
+    };
+
+
+    save();
+
+
+    renderAdmin();
+
+    renderPublic();
+
+}
+
+
+/* =====================================================
+   SECURITY
+===================================================== */
+
+function safe(value){
+
+    return String(value)
+
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+
+}
+
+
+/* =====================================================
+   ENTER KEY
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    e => {
+
+        if(
+            e.key === "Escape"
+        ){
+
+            closeLogin();
+
+            closeWinnerPopup();
+
+        }
+
+
+        if(
+            e.key === "Enter" &&
+            document
+                .getElementById(
+                    "password"
+                )
+                .value
+                .length
+        ){
+
+            login();
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
